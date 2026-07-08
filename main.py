@@ -2,9 +2,9 @@ import os
 from src import extract_audio
 from src import transcribe
 
-input_path = "input/"
-output_path = "output/"
-temp_path = "temp/"
+input_path = "input"
+output_path = "output"
+temp_path = "temp"
 
 video_files = os.listdir(input_path)
 
