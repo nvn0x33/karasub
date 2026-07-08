@@ -8,6 +8,8 @@ def extract(inp_dir, vid_file, out_dir):
     
     ffmpeg.run(out_audio, overwrite_output=True)
     
+    return audio_path
+    
 def rm_extension(file_name):
     file_name = file_name.split(".")
     file_name.pop()
