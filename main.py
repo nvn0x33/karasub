@@ -1,7 +1,6 @@
-import os
-import src
-# from src import extract_audio
-# from src import transcribe
+import os, src
+
+# font size = min(width, height) * 0.085 // formula
 
 input_path = "input"
 output_path = "output"
