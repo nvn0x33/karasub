@@ -1,5 +1,6 @@
 from rich import print
 from rich.panel import Panel
+from rich.console import Console
 from rich.prompt import Prompt, Confirm
 
 class UI:
@@ -13,9 +14,10 @@ class UI:
     }
     
     def __init__(self):
-        self.printUI()
+        self.print_UI()
     
     def print_UI(self):
+        Console().clear()
         print("[bold cyan]karasub[/bold cyan] is a tool that adds karaoke-style, word-by-word highlighted subtitles to your video.\n")
 
         print(Panel(
