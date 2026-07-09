@@ -1,4 +1,6 @@
-import os, src
+import os
+from src import extract
+from src import Transcribe
 
 # font size = min(width, height) * 0.085 // formula
 
@@ -9,5 +11,5 @@ temp_path = "temp"
 video_files = os.listdir(input_path)
 
 # pseudo code testings
-extracted_audio_path = src.extract(input_path, video_files[0], temp_path)
-src.convert(extracted_audio_path)
+extracted_audio_path = extract(input_path, video_files[0], temp_path)
+transcript = Transcribe(extracted_audio_path)

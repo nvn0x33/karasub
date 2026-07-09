@@ -1,5 +1,6 @@
 import ffmpeg
 from pathlib import Path
+from utils import rm_extension
 
 def extract(inp_dir, vid_file, out_dir):
     audio_path = Path(out_dir) / (rm_extension(vid_file) + ".mp3")
@@ -14,8 +15,3 @@ def extract(inp_dir, vid_file, out_dir):
     
     return audio_path
     
-def rm_extension(file_name):
-    file_name = file_name.split(".")
-    file_name.pop()
-    
-    return ".".join(file_name)
