@@ -8,6 +8,7 @@ class Transcribe:
         self.convert()
 
     def convert(self):
+        print("yes reached")
         model = WhisperModel(self.model_size, device="cpu", compute_type="int8")
         segments, _ = model.transcribe(self.audio_path, beam_size=5, word_timestamps=True)
         
