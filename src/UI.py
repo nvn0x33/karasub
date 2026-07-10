@@ -5,27 +5,28 @@ from rich.prompt import Prompt, Confirm
 from .utils import RGB_to_BGR, get_vid_files
 
 class UI:
-    config = {
-        "hl_color": "",
-        "hl_bg_color": "",
-        "text_color": "",
-        "bg_color": "",
-        "font_style": "",
-        "font_size": ""
-    }
     
     def __init__(self, default_font, input_dir):
         self.default_font = default_font
         self.input_dir = input_dir
         
+        self.config = {
+            "hl_color": "",
+            "hl_bg_color": "",
+            "text_color": "",
+            "bg_color": "",
+            "font_style": "",
+            "font_size": ""
+        }
+        
   
     def correct_config(self):
-        # print("before correction: ", self.config)
         # Convert RGB to BGR
         for key, value in self.config.items():
             if "color" in key:
                 self.config[key] = RGB_to_BGR(value)
                 
+        # Fallback to default font
         if self.config["font_style"] == "":
             self.config["font_style"] = self.default_font
     
@@ -42,6 +43,7 @@ class UI:
         if not Confirm.ask("Continue?"):
             exit()
             
+        # Get video file paths
         video_files = get_vid_files(self.input_dir)
 
         print("\n[bold magenta]HIGHLIGHTED WORD:[/bold magenta]")
