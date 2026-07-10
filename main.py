@@ -16,10 +16,10 @@ def get_font_size():
     
     if new_ui.config["font_size"] == "auto":
         for video in vid_files:
-            width, height = get_resolution((Path(input_dir)/video).as_posix())
+            width, height = get_resolution(video["path"])
             size = min(width, height) * 0.085
             
-            vid_font_sizes.append({"font_size": size, "video": video})
+            vid_font_sizes.append({"font_size": size, "video": video["name"]})
             
 # pseudo code testings
 new_ui = UI(font, input_dir)
@@ -31,7 +31,7 @@ get_font_size()
 print(vid_font_sizes)
     
 
-# extracted_audio_path = extract(input_dir, video_files[0], temp_dir)
+# extracted_audio_path = extract(vid_files[0]["path"], temp_dir)
 # print(extracted_audio_path)
 # transcript = Transcribe(extracted_audio_path)
 

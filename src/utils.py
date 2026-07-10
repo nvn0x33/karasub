@@ -1,5 +1,5 @@
-import os
-import ffmpeg 
+import os, ffmpeg
+from pathlib import Path
 
 def get_resolution(video_path):
     probe = ffmpeg.probe(video_path)
@@ -28,6 +28,7 @@ def get_vid_files(target_dir):
         _, ext = os.path.splitext(item)
 
         if ext in supported_exts:
-            found_files.append(item)
+            path = (Path(target_dir) / item).as_posix()
+            found_files.append({"name": item, "path": path})
             
     return found_files
