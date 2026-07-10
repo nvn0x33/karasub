@@ -2,7 +2,7 @@ from rich import print
 from rich.panel import Panel
 from rich.console import Console
 from rich.prompt import Prompt, Confirm
-from .utils import RGB_to_BGR
+from .utils import RGB_to_BGR, get_vid_files
 
 class UI:
     config = {
@@ -14,14 +14,13 @@ class UI:
         "font_size": ""
     }
     
-    def __init__(self, default_font):
+    def __init__(self, default_font, input_dir):
         self.default_font = default_font
+        self.input_dir = input_dir
         
-        self.print_UI()
-        self.correct_config()
-        
+  
     def correct_config(self):
-        print("before correction: ", self.config)
+        # print("before correction: ", self.config)
         # Convert RGB to BGR
         for key, value in self.config.items():
             if "color" in key:
@@ -29,9 +28,6 @@ class UI:
                 
         if self.config["font_style"] == "":
             self.config["font_style"] = self.default_font
-            
-        print("after correction: ", self.config)
-        
     
     def print_UI(self):
         Console().clear()
@@ -45,6 +41,8 @@ class UI:
 
         if not Confirm.ask("Continue?"):
             exit()
+            
+        video_files = get_vid_files(self.input_dir)
 
         print("\n[bold magenta]HIGHLIGHTED WORD:[/bold magenta]")
         print("[dim]Only hex codes are allowed:[/dim]")
@@ -57,6 +55,8 @@ class UI:
         self.config["bg_color"] = Prompt.ask("  Background       default - [grey0 on white]black[/grey0 on white] (#000000)", default="#000000")
 
         print("\n[bold magenta]FONT:[/bold magenta]")
-        self.config["font_style"] = Prompt.ask("  Style (Roboto Mono / path to .ttf, .otf, .ttc): ")
-        self.config["font_size"] = Prompt.ask("  Size (Enter = auto)", default="auto")
+        self.config["font_style"] = Prompt.ask("  Style (Roboto Mono / path to .ttf, .otf, .ttc)")
+        self.config["font_size"] = Prompt.ask("  Size for all videos (Enter = auto)", default="auto")
+        
+        return video_files
         
