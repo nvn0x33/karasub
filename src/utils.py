@@ -16,7 +16,7 @@ def RGB_to_BGR(hex="#FFGGHH"):
     hex = hex.upper().strip("#")
     
     # format example: {\c&H0000FF&}
-    new_hex = f"&H{hex[4:6]}{hex[2:4]}{hex[0:2]}&"
+    new_hex = f"&H00{hex[4:6]}{hex[2:4]}{hex[0:2]}&"
     
     return new_hex
 
