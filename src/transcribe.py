@@ -1,4 +1,5 @@
 from faster_whisper import WhisperModel
+import json
 
 class Transcribe:
     model_size = "small"
@@ -18,13 +19,12 @@ class Transcribe:
         
     def clean_segments(self, segments):
         
-        if segments is None or len(segments) < 1:
+        if not segments:
             raise ValueError("Error: segments is corrupted or empty.")
         
         transcript = []
         
         for segment in segments:
-            print(segment.id, segment.start, type(segment.start))
             words = []
             
             for raw_word in segment.words:
@@ -44,17 +44,10 @@ class Transcribe:
             }
             
             transcript.append(data)
-        # transcript = [
-		#     {
-        #         "id": "segment_1",
-        #         "start": 11.29,
-        #         "end": 12.1,
-        #         "text": ' Chris Gardner' (strip it),
-        #         "words": [
-        #             {"word": "Chris", "start": 12.1, "end": 12.1},
-        #             {"word": "Chris", "start": 12.1, "end": 12.58},
-        #             ...
-        #         ]
-        #     }
-        # ]
+            
+        self.save_transcript(transcript)
+            
+    def save_transcript(self, transcript):
+        with open ("temp/transcript.json", "a") as file:
+            json.dump(transcript, file)
         
