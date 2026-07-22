@@ -11,9 +11,9 @@ class UI:
         self.input_dir = input_dir
         
         self.config = {
-            "hl_color": "",
-            "hl_bg_color": "",
-            "text_color": "",
+            "primary_color": "",
+            "secondary_color": "",
+            "outline_color": "",
             "bg_color": "",
             "font_style": "",
             "font_size": ""
@@ -46,15 +46,15 @@ class UI:
         # Get video file paths
         video_files = get_vid_files(self.input_dir)
 
-        print("\n[bold magenta]HIGHLIGHTED WORD:[/bold magenta]")
         print("[dim]Only hex codes are allowed:[/dim]")
+        print("\n[bold magenta]HIGHLIGHTED WORD:[/bold magenta]")
         
-        self.config["hl_color"] = Prompt.ask("  Text color       default - [white]white[/white] (#FFFFFF)", default="#FFFFFF")
-        self.config["hl_bg_color"] = Prompt.ask("  Background       default - [yellow]yellow[/yellow] (#FFFF00)", default="#FFFF00")
+        self.config["primary_color"] = Prompt.ask("  Text color       default - [yellow]yellow[/yellow] (#FFFF00)", default="#FFFF00")
 
         print("\n[bold magenta]OTHER WORDS:[/bold magenta]")
-        self.config["text_color"] = Prompt.ask("  Text color       default - [white]white[/white] (#FFFFFF)", default="#FFFFFF")
+        self.config["secondary_color"] = Prompt.ask("  Text color       default - [white]white[/white] (#FFFFFF)", default="#FFFFFF")
         self.config["bg_color"] = Prompt.ask("  Background       default - [grey0 on white]black[/grey0 on white] (#000000)", default="#000000")
+        self.config["outline_color"] = Prompt.ask("  Outline       default - [grey0 on white]black[/grey0 on white] (#000000)", default="#000000")
 
         print("\n[bold magenta]FONT:[/bold magenta]")
         self.config["font_style"] = Prompt.ask("  Style (Roboto Mono / path to .ttf, .otf, .ttc)")
