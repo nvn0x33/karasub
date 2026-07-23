@@ -1,5 +1,6 @@
 from fontTools.ttLib import TTFont
 from .utils import rm_extension
+import textwrap
 
 class ASS:
     def __init__(self, video_data, config):
@@ -23,12 +24,11 @@ class ASS:
         Style: CustomKaraoke,{font_name},{self.video_data["font_size"]},{self.config["primary_color"]},{self.config["secondary_color"]},{self.config["outline_color"]},{self.config["bg_color"]},-1,0,0,0,100,100,0,0,1,2.66667,0,2,7,7,33,1
         """
         
-        body = f"""
+        body = textwrap.dedent(f"""\
         {header}
-        
         [Events]
         Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-        """
+        """)
         
         for line in self.video_data["transcript"]:
             start_time = self.sec_to_hms(line["start"])
@@ -38,9 +38,9 @@ class ASS:
             
             for word in line["words"]:
                 ceptisec = (word["end"] - word["start"]) * 100
-                dialogue += f"{{\k{ceptisec}}}{word} "
+                dialogue += f"{{\k{ceptisec}}}{word["word"]} "
             
-            dialogue = dialogue.strip()
+            dialogue = dialogue.strip() + "\n"
             body += dialogue
             
         self.script_to_ass(body)
@@ -48,7 +48,7 @@ class ASS:
     def script_to_ass(self, body):
         path = "temp/" + rm_extension(self.video_data["name"]) + ".ass"
         
-        with open(path, "a") as file:
+        with open(path, "w") as file:
             file.write(body)
         
     def sec_to_hms(self, total_sec):
