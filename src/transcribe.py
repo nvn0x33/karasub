@@ -2,7 +2,7 @@ from faster_whisper import WhisperModel
 import json
 
 class Transcribe:
-    model_size = "small"
+    model_size = "medium"
     model = None
     
     def __init__(self, audio_path):
