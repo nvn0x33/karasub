@@ -43,6 +43,8 @@ class ASS:
             dialogue = dialogue.strip()
             body += dialogue
             
+        self.script_to_ass(body)
+            
     def script_to_ass(self, body):
         path = "temp/" + rm_extension(self.video_data["name"]) + ".ass"
         

@@ -1,5 +1,5 @@
 from pathlib import Path
-from src import extract, Transcribe, UI
+from src import extract, Transcribe, UI, ASS
 from src import get_resolution
 import json
 
@@ -28,7 +28,7 @@ def append_font_data():
             {**video, 
              "resX": width,
              "resY": height,
-             "font_size": font, 
+             "font_size": int(font), 
              "transcript": []})
         
 def read_transcript():
@@ -68,6 +68,7 @@ videos_data[0]["transcript"] = transcript
 
 #-----------------------------------# NOW WE HAVE THE DATA WE NEED TO WRITE .ASS FILE #-----------------------------------#
 
+script = ASS(videos_data[0], new_ui.config)
 
 # TODO: calculate font size after obtaining video resolution
 #       clean and refactor the transcribed segments into usable form
