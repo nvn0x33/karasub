@@ -18,7 +18,8 @@ def append_font_data():
         width, height = get_resolution(video["path"])
         
         if new_ui.config["font_size"] == "auto":
-            size = min(width, height) * 0.085
+            # size = min(width, height) * 0.085
+            size = min(width, height) * 0.060
             
             font = size
         else:
