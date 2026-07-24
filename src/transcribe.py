@@ -10,6 +10,7 @@ class Transcribe:
         
 
     def convert(self, audio_path):
+        print("Transcribe.convert")
         segments, _ = Transcribe.model.transcribe(audio_path, beam_size=5, word_timestamps=True)
     
         segments = list(segments)
@@ -19,7 +20,7 @@ class Transcribe:
         
         if not segments:
             raise ValueError("Error: segments is corrupted or empty.")
-        
+        print("Clean segments")
         transcript = []
         
         for segment in segments:

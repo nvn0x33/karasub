@@ -28,19 +28,22 @@ class Handle:
         
         return vid_files
     
-    def parallel_process_vids(self, vid_files):
+    def parallel_process_vids(self):
         new_transcript = Transcribe()
-        self.process_video(vid_files[0], new_transcript)
+        self.process_video(Handle.videos_data[0], new_transcript)
     
     def process_video(self, video, transcript_handler):
         # Extract audio
+        print("Extracting audio")
         audio_path = extract(video, Handle.temp_dir)
         # Clean segments and create transcript data
+        print("Transcribing...")
         transcript_data = transcript_handler.convert(audio_path)
         
         # Append transcript data into video
         video["transcript"] = transcript_data
         # Initiate .ass subtitle file
+        print("Creating Ass script")
         new_script = ASS(video, Handle.config)
         # Write script and get its path
         path_to_sub = new_script.write_script()
@@ -49,6 +52,7 @@ class Handle:
         vid_out = (Path(Handle.output_dir) / video["name"]).as_posix()
 
         # Final output with subtitle + video.
+        print("Burn Ass script")
         burn_subtitle(video["path"], path_to_sub, font_folder, vid_out)
     
     def append_font_data(self, vid_files):
