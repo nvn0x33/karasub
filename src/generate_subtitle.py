@@ -1,5 +1,6 @@
 from fontTools.ttLib import TTFont
 from .utils import rm_extension
+
 import textwrap
 
 class ASS:

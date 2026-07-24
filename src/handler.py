@@ -28,15 +28,16 @@ class Handle:
         
         return vid_files
     
-    def parallel_process_vids(self):
-        pass
+    def parallel_process_vids(self, vid_files):
+        new_transcript = Transcribe()
+        self.process_video(vid_files[0], new_transcript)
     
-    def process_video(self, video):
+    def process_video(self, video, transcript_handler):
         # Extract audio
         audio_path = extract(video, Handle.temp_dir)
         # Clean segments and create transcript data
-        new_transcript = Transcribe(audio_path)
-        transcript_data = new_transcript.convert()
+        transcript_data = transcript_handler.convert(audio_path)
+        
         # Append transcript data into video
         video["transcript"] = transcript_data
         # Initiate .ass subtitle file

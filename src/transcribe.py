@@ -5,13 +5,12 @@ class Transcribe:
     model_size = "medium"
     model = None
     
-    def __init__(self, audio_path):
-        self.audio_path = audio_path
+    def __init__(self):
         Transcribe.model = WhisperModel(Transcribe.model_size, device="cpu", compute_type="int8")
         
 
-    def convert(self):
-        segments, _ = Transcribe.model.transcribe(self.audio_path, beam_size=5, word_timestamps=True)
+    def convert(self, audio_path):
+        segments, _ = Transcribe.model.transcribe(audio_path, beam_size=5, word_timestamps=True)
     
         segments = list(segments)
         return self.clean_segments(segments)
