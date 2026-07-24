@@ -57,7 +57,7 @@ class UI:
         self.config["outline_color"] = Prompt.ask("  Outline       default - [grey0 on white]black[/grey0 on white] (#000000)", default="#000000")
 
         print("\n[bold magenta]FONT:[/bold magenta]")
-        self.config["font_style"] = Prompt.ask("  Style (Roboto Mono / path to .ttf, .otf, .ttc)")
+        self.config["font_style"] = Prompt.ask("  Style (Default - Roboto mono / path to .ttf, .otf, .ttc)")
         self.config["font_size"] = Prompt.ask("  Size for all videos (Enter = auto)", default="auto")
         
         return video_files

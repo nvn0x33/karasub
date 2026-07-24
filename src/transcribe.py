@@ -9,13 +9,12 @@ class Transcribe:
         self.audio_path = audio_path
         Transcribe.model = WhisperModel(Transcribe.model_size, device="cpu", compute_type="int8")
         
-        self.convert()
 
     def convert(self):
         segments, _ = Transcribe.model.transcribe(self.audio_path, beam_size=5, word_timestamps=True)
     
         segments = list(segments)
-        self.clean_segments(segments)
+        return self.clean_segments(segments)
         
     def clean_segments(self, segments):
         
@@ -45,7 +44,8 @@ class Transcribe:
             
             transcript.append(data)
             
-        self.save_transcript(transcript)
+        # self.save_transcript(transcript)
+        return transcript
             
     def save_transcript(self, transcript):
         with open ("temp/transcript.json", "a") as file:

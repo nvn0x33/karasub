@@ -6,8 +6,7 @@ class ASS:
     def __init__(self, video_data, config):
         self.video_data = video_data
         self.config = config
-        
-        self.write_script()
+
         
     def write_script(self):
         font_name = self.get_font_name()
@@ -43,13 +42,15 @@ class ASS:
             dialogue = dialogue.strip() + "\n"
             body += dialogue
             
-        self.script_to_ass(body)
+        return self.script_to_ass(body)
             
     def script_to_ass(self, body):
         path = "temp/" + rm_extension(self.video_data["name"]) + ".ass"
         
         with open(path, "w") as file:
             file.write(body)
+            
+        return path
         
     def sec_to_hms(self, total_sec):
         mins, secs = divmod(total_sec, 60)
