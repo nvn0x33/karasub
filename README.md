@@ -25,7 +25,7 @@ python main.py
 
 ## Note
 
-The subtitle generation is working as intended, and the generated `.ass` files are accurate.
+The subtitle generation is working as intended, and the generated `.ass` are working correctly in Aegisub.
 
 The video rendering step is still a work in progress. In some videos, the burned subtitles may overlap or not render exactly as expected. If you only need the subtitle file, it should work perfectly with any player or editor that supports the ASS format.
 
